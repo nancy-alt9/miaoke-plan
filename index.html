@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妙可蓝多 × 视频号超品日投放方案</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.7;
+            padding: 0;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a73e8, #4a90d9, #7bb3e0);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(26, 115, 232, 0.3);
+        }
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+        .header-meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .section h2 {
+            font-size: 1.5em;
+            color: #1a73e8;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e8f0fe;
+        }
+        .section h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin: 24px 0 12px;
+        }
+        .section h4 {
+            font-size: 1.05em;
+            color: #555;
+            margin: 18px 0 10px;
+        }
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: #f0f6ff;
+            color: #1a5bb5;
+            font-weight: 600;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 2px solid #d4e4f7;
+        }
+        td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #eef2f7;
+        }
+        tr:hover td {
+            background: #f8fbff;
+        }
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 14px 0;
+            font-size: 0.9em;
+        }
+        .callout-info {
+            background: #e8f4fd;
+            border-left: 4px solid #1a73e8;
+        }
+        .callout-warning {
+            background: #fff8e1;
+            border-left: 4px solid #f5a623;
+        }
+        .callout-success {
+            background: #e8f5e9;
+            border-left: 4px solid #43a047;
+        }
+        .callout-todo {
+            background: #fce4ec;
+            border-left: 4px solid #e53935;
+        }
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tag-p0 { background: #ffcdd2; color: #c62828; }
+        .tag-p1 { background: #fff9c4; color: #f57f17; }
+        .tag-p2 { background: #e0f2f1; color: #00695c; }
+        .tag-done { background: #c8e6c9; color: #2e7d32; text-decoration: line-through; }
+        /* Chart container */
+        .chart-container {
+            background: white;
+            border: 2px solid #e53935;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            max-width: 800px;
+        }
+        .chart-title {
+            text-align: center;
+            font-size: 1.1em;
+            color: #e53935;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .chart-source {
+            text-align: center;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 10px;
+        }
+        /* Strong highlight */
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff176 60%);
+            font-weight: 600;
+        }
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: #1a73e8;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 0.85em;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 16px; }
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 1.6em; }
+            .section { padding: 20px; }
+            table { font-size: 0.8em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+    <h1>🧀 妙可蓝多 × 视频号超品日投放方案</h1>
+    <div class="header-meta">
+        <span>📅 超品日期：6/8 ~ 6/12（5天）</span>
+        <span>🎯 GMV目标：300万</span>
+        <span>💰 总预算：≈102万</span>
+        <span>📋 版本：v2.0 | 2026.05.21</span>
+    </div>
+</div>
+
+<!-- ========== 一、项目概览 ========== -->
+<div class="section">
+    <h2>一、项目概览</h2>
+    <h3>1.1 背景与目标</h3>
+    <table>
+        <tr><th>维度</th><th>内容</th></tr>
+        <tr><td>品牌</td><td>妙可蓝多</td></tr>
+        <tr><td>活动主题</td><td>超品日 × FIFA联名</td></tr>
+        <tr><td>超品日期</td><td>6/8（周日）~ 6/12（周四），共5天</td></tr>
+        <tr><td>GMV总目标</td><td><strong>300万</strong></td></tr>
+        <tr><td>总投放预算</td><td><strong>≈102万</strong>（超品5天100万 + 预热期2万）</td></tr>
+        <tr><td>核心策略</td><td>预热蓄水（ADQ收预约）→ 超品集中爆发放量</td></tr>
+    </table>
+
+    <h3>1.2 历史投放基线（2026/01/01~04/14）</h3>
+    <table>
+        <tr><th>指标</th><th>历史数据</th><th>超品目标</th><th>倍数</th></tr>
+        <tr><td>日均消耗</td><td>2.02万（3月成熟期）</td><td><strong>20万/天</strong></td><td><strong>10x</strong></td></tr>
+        <tr><td>历史最高日耗</td><td>3.36万</td><td><strong>25万（主爆发日）</strong></td><td><strong>7.4x</strong></td></tr>
+        <tr><td>月度最高消耗</td><td>62.6万（3月整月）</td><td><strong>100万（5天）</strong></td><td>—</td></tr>
+        <tr><td>整体ROI</td><td>1.88</td><td>2.0+（货补加持）</td><td>提升</td></tr>
+        <tr><td>账户数</td><td>2~3个</td><td>10~15个</td><td>5x</td></tr>
+        <tr><td>全域通</td><td>日耗几百元</td><td>占比20%（上限）</td><td>需跑模型</td></tr>
+        <tr><td><strong>小店直购</strong></td><td><strong>日耗1万元（已跑通）</strong></td><td><strong>超品期4万/天</strong></td><td><strong>链路稳定</strong></td></tr>
+    </table>
+</div>
+
+<!-- ========== 二、直播排期与直播形态 ========== -->
+<div class="section">
+    <h2>二、直播排期与直播形态</h2>
+    <h3>2.1 超品期间直播排期（6/8~6/12）</h3>
+    <table>
+        <tr><th>日期</th><th>直播形态</th><th>重点人物/场次</th><th>场地</th><th>备注</th></tr>
+        <tr><td><strong>6/8（周日）</strong></td><td>🔥 超品开场 + 明星场（待定）</td><td><strong>明星方琼</strong>（暂定6/8或6/9）</td><td>石家庄</td><td>下周确认档期</td></tr>
+        <tr><td><strong>6/9（周一）</strong></td><td>🔥 明星场（备选）/ 达人场（备选）</td><td>方琼（若6/9）或张烨（若6/9）</td><td>石家庄</td><td>错峰进场</td></tr>
+        <tr><td><strong>6/10（周二）</strong></td><td>🔥 仓播大场 + 达人场（优先）</td><td><strong>达人张烨</strong>（优先6/10）</td><td>合肥/石家庄</td><td>厂长人设 + FIFA新品</td></tr>
+        <tr><td>6/11（周三）</td><td>常规自播</td><td>自有主播团队</td><td>合肥</td><td>持续收割</td></tr>
+        <tr><td>6/12（周四）</td><td>收官自播</td><td>自有主播团队</td><td>合肥</td><td>收尾提效</td></tr>
+    </table>
+
+    <h3>2.2 24小时"日不落"直播策略</h3>
+    <table>
+        <tr><th>维度</th><th>说明</th></tr>
+        <tr><td><strong>直播时长</strong></td><td>超品期间执行24小时不间断直播</td></tr>
+        <tr><td><strong>场地要求</strong></td><td>石家庄场地必须支持24小时直播（已提需求确认中）</td></tr>
+        <tr><td><strong>转场方案</strong></td><td>快速断播→转场→复播，断播≈5~10分钟</td></tr>
+        <tr><td><strong>对投流的影响</strong></td><td>快速断播复播对投放无影响，投放端无需做任何操作，流量可正常承接（经验证）</td></tr>
+    </table>
+
+    <h3>2.2.1 分链路分时消耗分析（ADataClaw 数据）</h3>
+
+    <div class="callout callout-info">
+        📊 <strong>数据来源</strong>：基于 ADataClaw 过去一个月妙可蓝多分链路分时消耗分析。
+    </div>
+
+    <!-- 分链路分时消耗分布图 -->
+    <div class="chart-container">
+        <div class="chart-title">妙可蓝多 分链路日均分时消耗分布（过去一个月）</div>
+        <canvas id="hourlyChart" height="300"></canvas>
+        <div class="chart-source">数据来源：ADataClaw 投放工具 | 统计周期：过去30天</div>
+    </div>
+
+    <h4>日均分时消耗分布</h4>
+    <table>
+        <tr><th>时段</th><th>日均消耗</th><th>占比</th></tr>
+        <tr><td>凌晨(0-6点)</td><td>2,850元</td><td>10.8%</td></tr>
+        <tr><td>早间(6-9点)</td><td>4,026元</td><td>15.3%</td></tr>
+        <tr><td>上午(9-12点)</td><td>2,154元</td><td>8.2%</td></tr>
+        <tr><td>午间(12-14点)</td><td>1,160元</td><td>4.4%</td></tr>
+        <tr><td><strong>下午(14-18点)</strong></td><td><strong>6,629元</strong></td><td><strong>25.1% 👆</strong></td></tr>
+        <tr><td>晚间(18-21点)</td><td>4,846元</td><td>18.4%</td></tr>
+        <tr><td>深夜(21-24点)</td><td>4,721元</td><td>17.9%</td></tr>
+    </table>
+
+    <h4>分链路峰值差异</h4>
+    <table>
+        <tr><th>链路</th><th>峰值时段</th><th>峰值日均消耗</th><th>特征</th></tr>
+        <tr><td><strong>直播</strong></td><td>15:00</td><td>1,865元</td><td>下午集中投放，晚间持续消耗</td></tr>
+        <tr><td><strong>小店</strong></td><td>08:00</td><td>1,534元</td><td>早间起投最猛，上午逐渐回落</td></tr>
+        <tr><td>品宣</td><td>19:00</td><td>29元</td><td>消耗极少，晚间略高</td></tr>
+    </table>
+
+    <div class="callout callout-warning">
+        ⚡ <strong>核心发现</strong>：自播下午出销量的核心原因是<strong>客户开播时间为13:00~凌晨4:00</strong>，历史消耗峰值15:00与此吻合；结合行业经验，<strong>早间6:00~10:00</strong> 与 <strong>晚间19:00~23:00</strong> 为核心双黄金时段，两者流量不分高下；小店直购链路独立节奏——早间6~9点峰值最猛。
+    </div>
+
+    <div class="callout callout-todo">
+        🔲 <strong>TODO</strong>：需跟客户（王元）确认历史直播间开播时间段 + 超品期直播排班时段，以验证双黄金时段假设并确认并发量级预期。
+    </div>
+
+    <h3>2.2.2 直播链路分时预算配置</h3>
+    <table>
+        <tr><th>时段</th><th>预算占比</th><th>日均预算（13万/天）</th><th>出价系数</th><th>策略</th></tr>
+        <tr><td><strong>黄金A</strong> 6:00~10:00</td><td><strong>25%</strong></td><td>3.25万</td><td>1.3x</td><td>早间黄金，行业经验高转化时段</td></tr>
+        <tr><td><strong>黄金B</strong> 19:00~23:00</td><td><strong>25%</strong></td><td>3.25万</td><td>1.3x</td><td>晚间黄金，明星/达人在播时段</td></tr>
+        <tr><td><strong>次黄金</strong> 13:00~19:00</td><td><strong>25%</strong></td><td>3.25万</td><td>1.1x</td><td>客户自播开播时段（13:00起播）</td></tr>
+        <tr><td>平峰 10:00~13:00</td><td>10%</td><td>1.30万</td><td>1.0x</td><td>开播前低谷</td></tr>
+        <tr><td>深夜续播 23:00~4:00</td><td>10%</td><td>1.30万</td><td>0.9x</td><td>客户仍在播，低成本持续收割</td></tr>
+        <tr><td>夜间 4:00~6:00</td><td>5%</td><td>0.65万</td><td>0.7x</td><td>停播时段，全域通托管</td></tr>
+    </table>
+
+    <h3>2.2.3 小店直购链路分时预算配置</h3>
+    <table>
+        <tr><th>时段</th><th>预算占比</th><th>日均预算（4万/天）</th><th>出价系数</th><th>策略</th></tr>
+        <tr><td><strong>黄金</strong> 6:00~9:00</td><td><strong>30%</strong></td><td>1.2万</td><td>1.4x</td><td>早间峰值08:00</td></tr>
+        <tr><td><strong>次黄金</strong> 9:00~12:00</td><td><strong>25%</strong></td><td>1.0万</td><td>1.1x</td><td>上午渐回落但仍高于均值</td></tr>
+        <tr><td>平峰A 12:00~18:00</td><td>20%</td><td>0.8万</td><td>1.0x</td><td>午后维持</td></tr>
+        <tr><td>平峰B 18:00~24:00</td><td>15%</td><td>0.6万</td><td>0.9x</td><td>晚间直播抢量，直购收缩</td></tr>
+        <tr><td>夜间 0:00~6:00</td><td>10%</td><td>0.4万</td><td>0.8x</td><td>低价探索</td></tr>
+    </table>
+
+    <div class="callout callout-info">
+        📌 <strong>关键逻辑</strong>：直播与小店直购执行<strong>错峰互补</strong>——早6~9点小店直购峰值 + 直播起量；下午~晚间直播全力冲量 + 直购收缩。两条链路形成24h不间断消耗覆盖。
+    </div>
+
+    <h3>2.2.4 分时限流与预算保护策略</h3>
+    <table>
+        <tr><th>规则</th><th>触发条件</th><th>动作</th></tr>
+        <tr><td><strong>峰值加码</strong></td><td>黄金时段ROI>2.0 且消耗<预算80%</td><td>出价上浮10%，追加至120%</td></tr>
+        <tr><td><strong>峰值限流</strong></td><td>黄金时段CPA超标>50%</td><td>暂停低效广告组，保留TOP 30%</td></tr>
+        <tr><td><strong>低谷托底</strong></td><td>夜间在线<500人</td><td>全域通托管为主，ADQ暂停</td></tr>
+        <tr><td><strong>链路互补</strong></td><td>直播长时间停播（>30分钟）</td><td>直播预算20%转入小店直购</td></tr>
+        <tr><td><strong>明星/达人加码</strong></td><td>明星/达人进场时段</td><td>当前时段预算上浮30%</td></tr>
+    </table>
+
+    <h3>2.3 异地直播转场风险</h3>
+    <div class="callout callout-success">
+        ✅ <strong>经验结论（已验证）</strong>：快速断播再复播（5~10分钟内），投放端无需做任何操作，流量可正常承接，不会产生影响。
+    </div>
+    <table>
+        <tr><th>风险场景</th><th>断播时长</th><th>投流应对</th></tr>
+        <tr><td>石家庄→合肥转场</td><td>5~10分钟</td><td><strong>无需操作</strong>，流量自动承接</td></tr>
+        <tr><td>明星场→自播场切换</td><td>≈5分钟</td><td><strong>无需操作</strong></td></tr>
+        <tr><td>设备/网络故障（短时）</td><td><10分钟</td><td><strong>无需操作</strong></td></tr>
+        <tr><td>设备/网络故障（长时）</td><td>>30分钟</td><td>预算转直购链路兜底</td></tr>
+    </table>
+</div>
+
+<!-- ========== 三、预算总分配 ========== -->
+<div class="section">
+    <h2>三、预算总分配</h2>
+    <table>
+        <tr><th>阶段</th><th>时间</th><th>天数</th><th>预算</th><th>日均消耗</th><th>核心目标</th></tr>
+        <tr><td><strong>预热蓄水期</strong></td><td>5/20~6/7</td><td>18天</td><td><strong>2万</strong></td><td>≈1,100元</td><td>ADQ预约投放 + 基建扩容</td></tr>
+        <tr><td><strong>超品爆发期</strong></td><td>6/8~6/12</td><td>5天</td><td><strong>100万</strong></td><td><strong>20万</strong></td><td>集中放量冲GMV</td></tr>
+        <tr><td><strong>合计</strong></td><td></td><td>23天</td><td><strong>102万</strong></td><td></td><td></td></tr>
+    </table>
+</div>
+
+<!-- ========== 四、预热蓄水期 ========== -->
+<div class="section">
+    <h2>四、预热蓄水期方案（5/20~6/7，18天）</h2>
+    <h3>4.1 ADQ预约投放方案（预算2万）</h3>
+    <h4>目标拆解 — 总预约目标：5万个</h4>
+    <table>
+        <tr><th>渠道</th><th>预估贡献占比</th><th>预估贡献量</th><th>说明</th></tr>
+        <tr><td><strong>ADQ付费投放</strong></td><td>20%</td><td><strong>≈10,000个</strong></td><td>付费精准触达</td></tr>
+        <tr><td>公众号宣发</td><td>30%</td><td>≈15,000个</td><td>推文+模板消息</td></tr>
+        <tr><td>私域宣发</td><td>28%</td><td>≈14,000个</td><td>企微社群/客服号</td></tr>
+        <tr><td>其他渠道预热</td><td>22%</td><td>≈11,000个</td><td>KOC种草/短视频预约组件</td></tr>
+        <tr><td><strong>合计</strong></td><td>100%</td><td><strong>50,000个</strong></td><td></td></tr>
+    </table>
+
+    <h4>ADQ版位分配</h4>
+    <table>
+        <tr><th>版位</th><th>预算占比</th><th>预算金额</th><th>预期CPA</th><th>预期预约量</th></tr>
+        <tr><td><strong>微信视频号</strong></td><td>65%</td><td>13,000元</td><td>1.98元</td><td>≈6,565个</td></tr>
+        <tr><td><strong>微信公众号</strong></td><td>25%</td><td>5,000元</td><td>1.95元</td><td>≈2,564个</td></tr>
+        <tr><td>微信朋友圈</td><td>10%</td><td>2,000元</td><td>3.46元</td><td>≈578个</td></tr>
+        <tr><td><strong>合计</strong></td><td>100%</td><td><strong>20,000元</strong></td><td>加权≈2.06元</td><td><strong>≈9,707个</strong></td></tr>
+    </table>
+
+    <h4>投放节奏</h4>
+    <table>
+        <tr><th>阶段</th><th>时间</th><th>天数</th><th>日均消耗</th><th>总消耗</th><th>策略</th></tr>
+        <tr><td><strong>测试期</strong></td><td>5/20~5/27</td><td>8天</td><td>600元</td><td>4,800元</td><td>测试素材/人群/版位</td></tr>
+        <tr><td><strong>放量期</strong></td><td>5/28~6/4</td><td>7天</td><td>1,200元</td><td>8,400元</td><td>锁定高效方向</td></tr>
+        <tr><td><strong>冲刺期</strong></td><td>6/5~6/7</td><td>3天</td><td>2,300元</td><td>6,800元</td><td>加大预约力度</td></tr>
+    </table>
+
+    <h4>预热期成功标准（6/7前必须达成）</h4>
+    <table>
+        <tr><th>指标</th><th>目标值</th><th>说明</th></tr>
+        <tr><td>有消耗账户</td><td>≥8个</td><td>超品需要10+账户承载</td></tr>
+        <tr><td>素材储备</td><td>≥150条</td><td>超品期间需250+条</td></tr>
+        <tr><td>累计预约量</td><td>≥5万个（全渠道）</td><td>ADQ贡献≈10,000个</td></tr>
+        <tr><td>直播预约链接</td><td>已挂视频号</td><td>客户侧完成</td></tr>
+    </table>
+
+    <h3>4.2 基建扩容节奏</h3>
+    <table>
+        <tr><th>时间</th><th>账户数</th><th>日均广告数</th><th>日均TID数</th><th>投放工具</th></tr>
+        <tr><td>当前（5/20）</td><td>3个</td><td>300条</td><td>1,850个</td><td>ADQ智投+ADQ3.0</td></tr>
+        <tr><td>5/20~5/31</td><td>5~6个</td><td>400~500条</td><td>2,000~2,500个</td><td>ADQ + 扩容准备</td></tr>
+        <tr><td>6/1~6/7</td><td>8~10个</td><td>600~800条</td><td>2,500~3,000个</td><td>ADQ + 全域通就位</td></tr>
+        <tr><td><strong>6/8~6/12（超品）</strong></td><td><strong>10~15个</strong></td><td><strong>1,200~1,500条</strong></td><td><strong>8,000~10,000个</strong></td><td><strong>ADQ智投50%+3.0常规30%+全域通20%</strong></td></tr>
+    </table>
+</div>
+
+<!-- ========== 五、货盘与价格策略 ========== -->
+<div class="section">
+    <h2>五、货盘与价格策略</h2>
+    <h3>5.1 "新老链接同挂"策略</h3>
+    <table>
+        <tr><th>链接类型</th><th>产品</th><th>价格（券前）</th><th>到手价</th><th>定位</th></tr>
+        <tr><td><strong>新品链接</strong></td><td>节节高黑卡版（FIFA联名）</td><td>209元</td><td><strong>189元</strong></td><td>主推款，超品核心爆品</td></tr>
+        <tr><td><strong>老品链接</strong></td><td>节节高经典版</td><td>199元</td><td><strong>179元</strong></td><td>保底成交密度</td></tr>
+    </table>
+
+    <div class="callout callout-todo">
+        🔲 <strong>TODO</strong>：<br>
+        ① 确认新老品渠道差异/赠品差异；<br>
+        ② 赠品升级为高质感季节品（如露营车等），设计满400/2盒/4盒赠梯度；<br>
+        ③ 达播/自播能否做货组差异？需请教小二婧子确认风险。
+    </div>
+
+    <h3>5.2 渠道价格协调</h3>
+    <table>
+        <tr><th>渠道</th><th>价格</th><th>赠品差异</th><th>说明</th></tr>
+        <tr><td>自播</td><td>189元</td><td>保温杯+周边（若到仓）</td><td>主阵地</td></tr>
+        <tr><td>达播（张烨）</td><td>需拉齐或接近</td><td>保温杯+试吃装</td><td>赠品差异制造模糊感</td></tr>
+        <tr><td>小店直购</td><td>189元</td><td>与自播一致</td><td>商品卡同步配置</td></tr>
+    </table>
+</div>
+
+<!-- ========== 六、超品爆发期方案 ========== -->
+<div class="section">
+    <h2>六、超品爆发期方案（6/8~6/12，预算100万）</h2>
+
+    <h3>6.1 链路 × 工具 × 预算分配</h3>
+    <div class="callout callout-info">
+        📊 <strong>分配依据</strong>：基于历史复盘数据——ADQ智投ROI=1.97（占比67%）> ADQ 3.0 ROI=1.69（占比33%）；全域通目前日耗仅几百元，超品期保守试跑。
+    </div>
+
+    <h4>按链路汇总</h4>
+    <table>
+        <tr><th>链路</th><th>5天总预算</th><th>占比</th><th>说明</th></tr>
+        <tr><td><strong>直播引流</strong></td><td>65万</td><td>65%</td><td>核心链路，ADQ智投+3.0+全域通协同</td></tr>
+        <tr><td><strong>小店直购</strong></td><td>20万</td><td>20%</td><td>链路已跑通（日耗1万），超品4倍放量</td></tr>
+        <tr><td>KOC短视频加热</td><td>8万</td><td>8%</td><td>间接贡献，为直播间蓄热</td></tr>
+        <tr><td>达播引流</td><td>7万</td><td>7%</td><td>明星/达人场集中投放</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>100万</strong></td><td>100%</td><td></td></tr>
+    </table>
+
+    <h4>按工具汇总</h4>
+    <table>
+        <tr><th>投放工具</th><th>5天总预算</th><th>占比</th><th>定位</th><th>历史ROI</th></tr>
+        <tr><td><strong>ADQ智投</strong></td><td><strong>50万</strong></td><td><strong>50%</strong></td><td>绝对主力，全链路通投</td><td>1.97</td></tr>
+        <tr><td><strong>ADQ 3.0常规</strong></td><td><strong>30万</strong></td><td><strong>30%</strong></td><td>稳定补充，精细化调控</td><td>1.69</td></tr>
+        <tr><td><strong>全域通</strong></td><td><strong>20万</strong></td><td><strong>20%</strong></td><td>上限，试跑+系统探索</td><td>待验证 ⚠️</td></tr>
+    </table>
+
+    <h4>链路 × 工具 完整矩阵</h4>
+    <table>
+        <tr><th>链路</th><th>投放工具</th><th>日均预算</th><th>5天总预算</th><th>占比</th><th>预期ROI</th><th>说明</th></tr>
+        <tr><td><strong>直播</strong></td><td>ADQ智投</td><td>5.0万</td><td>25万</td><td>25%</td><td>1.9~2.0</td><td>主力放量</td></tr>
+        <tr><td><strong>直播</strong></td><td>ADQ 3.0</td><td>4.0万</td><td>20万</td><td>20%</td><td>1.7~1.9</td><td>补充跑量</td></tr>
+        <tr><td><strong>直播</strong></td><td>全域通（4001）</td><td>4.0万</td><td>20万</td><td>20%</td><td>待验证</td><td>⚠️ 上限，需确认审核</td></tr>
+        <tr><td><strong>小店直购</strong></td><td>ADQ智投</td><td>2.0万</td><td>10万</td><td>10%</td><td>2.0~2.5</td><td>链路已跑通</td></tr>
+        <tr><td><strong>小店直购</strong></td><td>ADQ 3.0</td><td>2.0万</td><td>10万</td><td>10%</td><td>1.8~2.2</td><td>3.0补充</td></tr>
+        <tr><td>KOC加热</td><td>ADQ智投/3.0</td><td>1.6万</td><td>8万</td><td>8%</td><td>间接贡献</td><td>短视频加热</td></tr>
+        <tr><td>达播引流</td><td>ADQ智投/3.0</td><td>1.4万</td><td>7万</td><td>7%</td><td>间接贡献</td><td>集中明星/达人日</td></tr>
+        <tr><td><strong>合计</strong></td><td></td><td><strong>20万</strong></td><td><strong>100万</strong></td><td>100%</td><td><strong>加权≈2.0+</strong></td><td></td></tr>
+    </table>
+
+    <div class="callout callout-warning">
+        ⚠️ <strong>全域通风险说明</strong>：当前全域通日耗仅几百元，存在审核风险。20万为上限预算，若无法起量则回流至ADQ智投。
+    </div>
+    <div class="callout callout-todo">
+        🔲 <strong>TODO</strong>：需跟客户确认全域通审核状态及超品前能否跑通；客户待定100万预算分链路×分工具的最终分配逻辑。
+    </div>
+
+    <h4>预算弹性机制</h4>
+    <table>
+        <tr><th>场景</th><th>调整方案</th></tr>
+        <tr><td>全域通审核通过+起量顺利</td><td>维持20万，视情况追加5~10万</td></tr>
+        <tr><td>全域通审核未通过/无法起量</td><td>20万全部回流ADQ智投（升至70%）</td></tr>
+        <tr><td>ADQ 3.0效率低于1.5</td><td>从3.0转移预算至智投</td></tr>
+        <tr><td>小店直购ROI>2.5超预期</td><td>从直播追加5~10万至直购</td></tr>
+    </table>
+
+    <h3>6.2 5天消耗节奏</h3>
+    <table>
+        <tr><th>日期</th><th>阶段</th><th>日耗目标</th><th>策略重点</th></tr>
+        <tr><td><strong>6/8（周日）</strong></td><td>🔥 超品开场 + 明星场</td><td><strong>22~25万</strong></td><td>峰值日（若方琼进场）；5万预约冲首小时在线</td></tr>
+        <tr><td><strong>6/9（周一）</strong></td><td>🔥 爆发 Day 2</td><td><strong>22~25万</strong></td><td>全域通加速放量</td></tr>
+        <tr><td><strong>6/10（周二）</strong></td><td>🔥 达人张烨 + 仓播</td><td><strong>25万</strong></td><td>达人+仓播大场，全力冲量</td></tr>
+        <tr><td>6/11（周三）</td><td>持续收割</td><td><strong>17万</strong></td><td>维持高效方向，KOC集中加热</td></tr>
+        <tr><td>6/12（周四）</td><td>收尾提效</td><td><strong>11万</strong></td><td>砍低ROI方向，聚焦高效收尾</td></tr>
+        <tr><td><strong>合计</strong></td><td></td><td><strong>≈100万</strong></td><td></td></tr>
+    </table>
+
+    <h3>6.3 版位优先级</h3>
+    <table>
+        <tr><th>优先级</th><th>版位</th><th>历史ROI</th><th>超品策略</th></tr>
+        <tr><td><span class="tag tag-p0">P0</span></td><td>微信视频号</td><td>1.91</td><td>主力放量阵地</td></tr>
+        <tr><td><span class="tag tag-p0">P0</span></td><td>微信公众号</td><td>1.96</td><td>加大基建，释放增量</td></tr>
+        <tr><td><span class="tag tag-p1">P1</span></td><td>平台与内容广告</td><td>1.91（智投2.58）</td><td>重点加码ADQ智投方向</td></tr>
+        <tr><td><span class="tag tag-p2">P2</span></td><td>微信朋友圈</td><td>1.64</td><td>配合品牌曝光</td></tr>
+        <tr><td>❌</td><td>微信小程序</td><td>1.49</td><td>收缩或暂停</td></tr>
+    </table>
+</div>
+
+<!-- ========== 七、素材需求 ========== -->
+<div class="section">
+    <h2>七、素材需求与产出节奏</h2>
+    <table>
+        <tr><th>素材类型</th><th>数量目标</th><th>来源</th><th>用途</th></tr>
+        <tr><td>FIFA联名产品短视频</td><td>30~50条</td><td>客户提供/拍摄</td><td>全域通+ADQ主力素材</td></tr>
+        <tr><td>老品素材（保留）</td><td>20~30条</td><td>现有素材库</td><td>匹配老品链接179元</td></tr>
+        <tr><td>直播切片</td><td>50~100条</td><td>自播间录制</td><td>全域通实时画面素材</td></tr>
+        <tr><td>KOC混剪/翻拍</td><td>50+条</td><td>KOC素材库</td><td>加热+投流</td></tr>
+        <tr><td>AIGC衍生素材</td><td>100+条</td><td>妙思自动衍生</td><td>全域通规模化创意</td></tr>
+        <tr><td>产品图文</td><td>20~30组</td><td>客户/设计</td><td>直购商品卡素材</td></tr>
+        <tr><td>明星/达人预热素材</td><td>3~5条</td><td>方琼/张烨相关</td><td>预约投放+引流</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>280~380条</strong></td><td></td><td></td></tr>
+    </table>
+
+    <h4>产出节奏</h4>
+    <table>
+        <tr><th>时间</th><th>素材里程碑</th><th>数量</th></tr>
+        <tr><td>5/20~5/24</td><td>首批上线（预约+FIFA联名+切片）</td><td>50条</td></tr>
+        <tr><td>5/25~5/31</td><td>第二批（KOC+AIGC+切片）</td><td>80条</td></tr>
+        <tr><td>6/1~6/7</td><td>第三批（冲刺+应急储备）</td><td>70条</td></tr>
+        <tr><td>6/8~6/12</td><td>实时补充（每日新增）</td><td>50+条</td></tr>
+    </table>
+</div>
+
+<!-- ========== 八、GMV预估 ========== -->
+<div class="section">
+    <h2>八、GMV贡献预估</h2>
+    <table>
+        <tr><th>场域</th><th>投流消耗</th><th>预期ROI</th><th>投流直接GMV</th><th>自然流量协同</th><th>总GMV</th></tr>
+        <tr><td>自播（直播投流）</td><td>73.5万</td><td>2.0</td><td>147万</td><td>+35~50万</td><td>182~197万</td></tr>
+        <tr><td>小店直购</td><td>15万</td><td>2.5</td><td>37.5万</td><td>+5~10万</td><td>42~47万</td></tr>
+        <tr><td>KOC加热</td><td>7.5万</td><td>—</td><td>—</td><td>+40~60万</td><td>40~60万</td></tr>
+        <tr><td>达播引流</td><td>4万</td><td>—</td><td>—</td><td>+30~50万</td><td>30~50万</td></tr>
+        <tr><td>预约到播撬动</td><td>—</td><td>—</td><td>—</td><td>+15~25万</td><td>15~25万</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>100万</strong></td><td></td><td><strong>≈185万</strong></td><td><strong>+125~195万</strong></td><td><strong>309~379万</strong></td></tr>
+    </table>
+    <div class="callout callout-success">
+        ✅ <strong>结论</strong>：超品100万投流 + 自然流量协同 + KOC/达播联动 + 预约到播撬动 → <strong>预计总GMV 309~379万，中位344万，300万目标稳达。</strong>
+    </div>
+</div>
+
+<!-- ========== 九、风险与应对 ========== -->
+<div class="section">
+    <h2>九、风险与应对</h2>
+    <table>
+        <tr><th>风险</th><th>概率</th><th>影响</th><th>应对方案</th></tr>
+        <tr><td>全域通起量慢</td><td>中</td><td>前2天预算承接不足</td><td>ADQ智投扩至60%+增开账户</td></tr>
+        <tr><td>日耗跑不满</td><td>中低</td><td>预算消耗不完</td><td>提高出价+增加TID+加速素材</td></tr>
+        <tr><td>ROI低于1.5</td><td>低</td><td>投产比不理想</td><td>实时监控，<1.5立即暂停转移</td></tr>
+        <tr><td>素材衰减过快</td><td>中</td><td>CTR下降</td><td>预留50条应急素材6/10后上线</td></tr>
+        <tr><td>异地转场断播</td><td>低</td><td>5~10分钟断播</td><td>无需操作，流量可承接（已验证）</td></tr>
+        <tr><td>新品流速不及预期</td><td>中</td><td>成交密度下降</td><td>立即切回老品主推</td></tr>
+        <tr><td>明星档期变动</td><td>中低</td><td>峰值日流量低</td><td>达人张烨顶上+靠出价素材弥补</td></tr>
+        <tr><td>渠道价格冲突</td><td>低</td><td>用户比价跳失</td><td>赠品差异制造价格模糊感</td></tr>
+    </table>
+</div>
+
+<!-- ========== 十、TODO清单 ========== -->
+<div class="section">
+    <h2>十、客户协同 TO DO 清单</h2>
+    <table>
+        <tr><th>序号</th><th>事项</th><th>负责方</th><th>时间节点</th><th>优先级</th></tr>
+        <tr><td>1</td><td>⭐ <strong>直播预约链接挂视频号</strong></td><td>客户</td><td>5/20前完成</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>2</td><td>⭐ <strong>明星方琼档期最终确认</strong>（6/8或6/9）</td><td>客户（Sunny）</td><td>下周确认</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>3</td><td>⭐ <strong>达人张烨档期确认</strong>（优先6/10）</td><td>客户（Sunny）</td><td>下周确认</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>4</td><td>⭐ <strong>确认超品期直播排班时段及流量峰值并发量级</strong>（早6~10点是否排播、晚间排播时段）</td><td>客户+运营方</td><td>5/25前</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>5</td><td>⭐ <strong>确认历史直播间开播时间段</strong>（校准黄金时段预算分配）</td><td>客户（王元）</td><td>5/25前</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>6</td><td>⭐ <strong>100万预算分链路×分工具的分配逻辑确认</strong></td><td>客户</td><td>待定</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>7</td><td>账户扩容审批（目标10~15个）</td><td>客户+我们</td><td>5/25前首批</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>8</td><td><strong>石家庄场地确认</strong>（支持24h直播）</td><td>运营方（张文）</td><td>本周内</td><td><span class="tag tag-p0">P0</span></td></tr>
+        <tr><td>9</td><td>⭐ <strong>货盘机制确认：新老品区别+赠品升级</strong>（高质感季节品如露营车，满400/2盒/4盒赠）</td><td>客户（Sunny/王元）</td><td>本周内</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>10</td><td>⭐ <strong>达播/自播货组差异确认</strong>（请教小二婧子风险）</td><td>我们（请教小二婧子）</td><td>本周内</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>11</td><td>4版直播间背景板方案</td><td>运营方（张文）</td><td>下周</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>12</td><td>6/6前完成视觉物料打印并到场</td><td>运营方</td><td>6/6</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>13</td><td>最终版货盘机制及到手价计算逻辑</td><td>客户（王元）</td><td>本周内</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>14</td><td>FIFA联名素材提供（首批）</td><td>客户</td><td>5/24前</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>15</td><td>仓播大场排期确认</td><td>客户</td><td>5/25前</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>16</td><td>福袋试吃装+赠品库存备货</td><td>客户</td><td>6/6前到仓</td><td><span class="tag tag-p1">P1</span></td></tr>
+        <tr><td>17</td><td>福袋互动条件确认</td><td>运营方（张文）</td><td>本周确认</td><td><span class="tag tag-p2">P2</span></td></tr>
+        <tr><td>18</td><td>KOC素材授权/提供</td><td>客户</td><td>5/28前</td><td><span class="tag tag-p2">P2</span></td></tr>
+        <tr><td>19</td><td>超品期间直播间排班确认（24h排班表）</td><td>客户+运营方</td><td>6/1前</td><td><span class="tag tag-p2">P2</span></td></tr>
+        <tr><td>20</td><td><s>小店直购链路开通</s></td><td><s>客户</s></td><td>✅ 已完成</td><td><span class="tag tag-done">Done</span></td></tr>
+    </table>
+</div>
+
+<!-- ========== 十一、关键里程碑 ========== -->
+<div class="section">
+    <h2>十一、关键里程碑</h2>
+    <table>
+        <tr><th>时间</th><th>里程碑</th><th>验收标准</th></tr>
+        <tr><td>5/20</td><td>预热启动</td><td>ADQ预约投放上线</td></tr>
+        <tr><td>5/25</td><td>首周验收</td><td>账户5~6个就位 + 预约投放稳定</td></tr>
+        <tr><td><strong>5/26~5/30</strong></td><td><strong>明星&达人档期锁定</strong></td><td>方琼确认6/8或6/9；张烨确认6/10</td></tr>
+        <tr><td>6/1</td><td>中期验收</td><td>素材≥100条 + 预约≥2万 + 账户≥6个</td></tr>
+        <tr><td><strong>6/6</strong></td><td><strong>物料到位</strong></td><td>背景板+赠品到仓+场地就绪</td></tr>
+        <tr><td>6/7</td><td>预热完成</td><td>账户≥8个 + 素材≥150条 + 预约≥5万</td></tr>
+        <tr><td><strong>6/8</strong></td><td><strong>超品开启</strong></td><td>日耗22~25万 + 开播在线≥8,000人</td></tr>
+        <tr><td><strong>6/10</strong></td><td><strong>峰值日</strong></td><td>日耗25万 + 达人张烨场</td></tr>
+        <tr><td>6/12</td><td>超品收官</td><td>累计消耗100万 + GMV≥300万</td></tr>
+    </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>方案制定：2026.05.20 | v2.0更新：2026.05.21 — 整合618直播规划会议纪要</p>
+    <p>下次更新：待明星&达人档期最终确认后</p>
+</div>
+
+</div>
+
+<!-- ========== Chart.js 分链路分时消耗图 ========== -->
+<script>
+const ctx = document.getElementById('hourlyChart').getContext('2d');
+
+// 基于ADataClaw截图数据重建的分链路分时消耗
+const hours = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+
+// 直播链路（绿色）- 下午3点峰值约1865元，晚间持续
+const liveData = [80, 60, 50, 40, 35, 50, 120, 200, 250, 180, 150, 130, 100, 110, 600, 1865, 1600, 1400, 1200, 1100, 1000, 900, 700, 400];
+
+// 小店链路（橙色）- 早间8点峰值约1534元
+const shopData = [150, 120, 100, 80, 70, 100, 400, 1200, 1534, 1100, 800, 600, 400, 350, 300, 280, 260, 240, 200, 180, 160, 140, 120, 100];
+
+// 品宣链路（蓝色）- 整体消耗极低
+const brandData = [5, 3, 2, 2, 2, 3, 5, 8, 10, 12, 15, 12, 10, 8, 12, 15, 18, 20, 22, 29, 25, 20, 15, 8];
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: hours,
+        datasets: [
+            {
+                label: '品宣',
+                data: brandData,
+                borderColor: '#4285f4',
+                backgroundColor: 'rgba(66, 133, 244, 0.1)',
+                borderWidth: 2,
+                pointRadius: 1,
+                tension: 0.3
+            },
+            {
+                label: '小店',
+                data: shopData,
+                borderColor: '#f5a623',
+                backgroundColor: 'rgba(245, 166, 35, 0.1)',
+                borderWidth: 2.5,
+                pointRadius: 1,
+                tension: 0.3
+            },
+            {
+                label: '直播',
+                data: liveData,
+                borderColor: '#34a853',
+                backgroundColor: 'rgba(52, 168, 83, 0.1)',
+                borderWidth: 2.5,
+                pointRadius: 1,
+                tension: 0.3
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    padding: 20
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ' + context.parsed.y + '元';
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: '小时'
+                },
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: '日均消耗/元'
+                },
+                beginAtZero: true
+            }
+        },
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        }
+    }
+});
+</script>
+
+</body>
+</html>
