@@ -257,9 +257,9 @@
     </div>
 
     <!-- 分链路分时消耗分布图 -->
-    <div class="chart-container">
-        <div class="chart-title">妙可蓝多 分链路日均分时消耗分布（过去一个月）</div>
-        <canvas id="hourlyChart" height="300"></canvas>
+    <div class="chart-container" style="max-width: 700px; margin: 20px auto;">
+        <div class="chart-title" style="font-size: 14px;">妙可蓝多 分链路日均分时消耗分布（过去一个月）</div>
+        <canvas id="hourlyChart" height="180"></canvas>
         <div class="chart-source">数据来源：ADataClaw 投放工具 | 统计周期：过去30天</div>
     </div>
 
@@ -302,29 +302,10 @@
         <tr><td>夜间 4:00~6:00</td><td>5%</td><td>0.65万</td><td>0.7x</td><td>停播时段，全域通托管</td></tr>
     </table>
 
-    <h3>2.2.3 小店直购链路分时预算配置</h3>
-    <table>
-        <tr><th>时段</th><th>预算占比</th><th>日均预算（4万/天）</th><th>出价系数</th><th>策略</th></tr>
-        <tr><td><strong>黄金</strong> 6:00~9:00</td><td><strong>30%</strong></td><td>1.2万</td><td>1.4x</td><td>早间峰值08:00</td></tr>
-        <tr><td><strong>次黄金</strong> 9:00~12:00</td><td><strong>25%</strong></td><td>1.0万</td><td>1.1x</td><td>上午渐回落但仍高于均值</td></tr>
-        <tr><td>平峰A 12:00~18:00</td><td>20%</td><td>0.8万</td><td>1.0x</td><td>午后维持</td></tr>
-        <tr><td>平峰B 18:00~24:00</td><td>15%</td><td>0.6万</td><td>0.9x</td><td>晚间直播抢量，直购收缩</td></tr>
-        <tr><td>夜间 0:00~6:00</td><td>10%</td><td>0.4万</td><td>0.8x</td><td>低价探索</td></tr>
-    </table>
-
+    <h3>2.2.3 小店直购/商品卡核心策略</h3>
     <div class="callout callout-info">
-        📌 <strong>关键逻辑</strong>：直播与小店直购执行<strong>错峰互补</strong>——早6~9点小店直购峰值 + 直播起量；下午~晚间直播全力冲量 + 直购收缩。两条链路形成24h不间断消耗覆盖。
+        📌 <strong>核心策略</strong>：小店直购/商品卡投放无需细分时段预算，重点通过<strong>短直双开</strong>（短视频+直播间同时投放）或<strong>ADQ智投单链路</strong>投放来提升整体消耗量级即可。系统会自动优化分时投放节奏。
     </div>
-
-    <h3>2.2.4 分时限流与预算保护策略</h3>
-    <table>
-        <tr><th>规则</th><th>触发条件</th><th>动作</th></tr>
-        <tr><td><strong>峰值加码</strong></td><td>黄金时段ROI>2.0 且消耗<预算80%</td><td>出价上浮10%，追加至120%</td></tr>
-        <tr><td><strong>峰值限流</strong></td><td>黄金时段CPA超标>50%</td><td>暂停低效广告组，保留TOP 30%</td></tr>
-        <tr><td><strong>低谷托底</strong></td><td>夜间在线<500人</td><td>全域通托管为主，ADQ暂停</td></tr>
-        <tr><td><strong>链路互补</strong></td><td>直播长时间停播（>30分钟）</td><td>直播预算20%转入小店直购</td></tr>
-        <tr><td><strong>明星/达人加码</strong></td><td>明星/达人进场时段</td><td>当前时段预算上浮30%</td></tr>
-    </table>
 
     <h3>2.3 异地直播转场风险</h3>
     <div class="callout callout-success">
@@ -334,8 +315,6 @@
         <tr><th>风险场景</th><th>断播时长</th><th>投流应对</th></tr>
         <tr><td>石家庄→合肥转场</td><td>5~10分钟</td><td><strong>无需操作</strong>，流量自动承接</td></tr>
         <tr><td>明星场→自播场切换</td><td>≈5分钟</td><td><strong>无需操作</strong></td></tr>
-        <tr><td>设备/网络故障（短时）</td><td><10分钟</td><td><strong>无需操作</strong></td></tr>
-        <tr><td>设备/网络故障（长时）</td><td>>30分钟</td><td>预算转直购链路兜底</td></tr>
     </table>
 </div>
 
@@ -344,15 +323,15 @@
     <h2>三、预算总分配</h2>
     <table>
         <tr><th>阶段</th><th>时间</th><th>天数</th><th>预算</th><th>日均消耗</th><th>核心目标</th></tr>
-        <tr><td><strong>预热蓄水期</strong></td><td>5/20~6/7</td><td>18天</td><td><strong>2万</strong></td><td>≈1,100元</td><td>ADQ预约投放 + 基建扩容</td></tr>
+        <tr><td><strong>预热蓄水期</strong></td><td>5/27~6/7</td><td>12天</td><td><strong>2万</strong></td><td>≈1,670元</td><td>ADQ预约投放 + 基建扩容</td></tr>
         <tr><td><strong>超品爆发期</strong></td><td>6/8~6/12</td><td>5天</td><td><strong>100万</strong></td><td><strong>20万</strong></td><td>集中放量冲GMV</td></tr>
-        <tr><td><strong>合计</strong></td><td></td><td>23天</td><td><strong>102万</strong></td><td></td><td></td></tr>
+        <tr><td><strong>合计</strong></td><td></td><td>17天</td><td><strong>102万</strong></td><td></td><td></td></tr>
     </table>
 </div>
 
 <!-- ========== 四、预热蓄水期 ========== -->
 <div class="section">
-    <h2>四、预热蓄水期方案（5/20~6/7，18天）</h2>
+    <h2>四、预热蓄水期方案（5/27~6/7，12天）</h2>
     <h3>4.1 ADQ预约投放方案（预算2万）</h3>
     <h4>目标拆解 — 总预约目标：5万个</h4>
     <table>
@@ -376,9 +355,9 @@
     <h4>投放节奏</h4>
     <table>
         <tr><th>阶段</th><th>时间</th><th>天数</th><th>日均消耗</th><th>总消耗</th><th>策略</th></tr>
-        <tr><td><strong>测试期</strong></td><td>5/20~5/27</td><td>8天</td><td>600元</td><td>4,800元</td><td>测试素材/人群/版位</td></tr>
-        <tr><td><strong>放量期</strong></td><td>5/28~6/4</td><td>7天</td><td>1,200元</td><td>8,400元</td><td>锁定高效方向</td></tr>
-        <tr><td><strong>冲刺期</strong></td><td>6/5~6/7</td><td>3天</td><td>2,300元</td><td>6,800元</td><td>加大预约力度</td></tr>
+        <tr><td><strong>测试期</strong></td><td>5/27~5/30</td><td>4天</td><td>1,000元</td><td>4,000元</td><td>测试素材/人群/版位</td></tr>
+        <tr><td><strong>放量期</strong></td><td>5/31~6/4</td><td>5天</td><td>1,600元</td><td>8,000元</td><td>锁定高效方向</td></tr>
+        <tr><td><strong>冲刺期</strong></td><td>6/5~6/7</td><td>3天</td><td>2,670元</td><td>8,000元</td><td>加大预约力度</td></tr>
     </table>
 
     <h4>预热期成功标准（6/7前必须达成）</h4>
@@ -432,46 +411,41 @@
 
     <h3>6.1 链路 × 工具 × 预算分配</h3>
     <div class="callout callout-info">
-        📊 <strong>分配依据</strong>：基于历史复盘数据——ADQ智投ROI=1.97（占比67%）> ADQ 3.0 ROI=1.69（占比33%）；全域通目前日耗仅几百元，超品期保守试跑。
+        📊 <strong>数据来源</strong>：基于客户规划的超品期投放预算（≈111.8万），在此基础上建议适当<strong>增加ADQ预算占比</strong>在KOC和自播&商品卡上，提升可控性和ROI。
     </div>
 
-    <h4>按链路汇总</h4>
+    <h4>客户当前规划 vs 我方建议</h4>
     <table>
-        <tr><th>链路</th><th>5天总预算</th><th>占比</th><th>说明</th></tr>
-        <tr><td><strong>直播引流</strong></td><td>65万</td><td>65%</td><td>核心链路，ADQ智投+3.0+全域通协同</td></tr>
-        <tr><td><strong>小店直购</strong></td><td>20万</td><td>20%</td><td>链路已跑通（日耗1万），超品4倍放量</td></tr>
-        <tr><td>KOC短视频加热</td><td>8万</td><td>8%</td><td>间接贡献，为直播间蓄热</td></tr>
-        <tr><td>达播引流</td><td>7万</td><td>7%</td><td>明星/达人场集中投放</td></tr>
-        <tr><td><strong>合计</strong></td><td><strong>100万</strong></td><td>100%</td><td></td></tr>
+        <tr><th>场域</th><th>投放工具</th><th>客户规划（万）</th><th>我方建议（万）</th><th>调整说明</th></tr>
+        <tr><td rowspan="3"><strong>自播</strong></td><td>ADQ</td><td>16.5</td><td><strong>22</strong></td><td>↑ ADQ加码，提升可控跑量能力</td></tr>
+        <tr><td>微信豆</td><td>14.5</td><td>12</td><td>微信豆适当收缩，ADQ补位</td></tr>
+        <tr><td>小店投放</td><td>0</td><td>0</td><td>—</td></tr>
+        <tr><td><strong>KOC</strong></td><td>微信豆</td><td>65</td><td>55</td><td rowspan="2">拆出10万给ADQ加热，可控性更强</td></tr>
+        <tr><td><strong>KOC</strong></td><td>ADQ</td><td>0</td><td><strong>10</strong></td></tr>
+        <tr><td rowspan="2"><strong>商品卡</strong></td><td>ADQ</td><td>15</td><td><strong>18</strong></td><td>↑ ADQ加码，商品卡链路已验证ROI 2.0+</td></tr>
+        <tr><td>小店投放</td><td>0.8</td><td>0.8</td><td>保持</td></tr>
+        <tr><td><strong>达播</strong></td><td>—</td><td>0</td><td>0</td><td>达播GMV靠达人自带流量</td></tr>
+        <tr><td colspan="2"><strong>合计</strong></td><td><strong>111.8</strong></td><td><strong>117.8</strong></td><td>建议追加6万ADQ预算</td></tr>
     </table>
 
-    <h4>按工具汇总</h4>
+    <h4>按工具汇总（建议版）</h4>
     <table>
-        <tr><th>投放工具</th><th>5天总预算</th><th>占比</th><th>定位</th><th>历史ROI</th></tr>
-        <tr><td><strong>ADQ智投</strong></td><td><strong>50万</strong></td><td><strong>50%</strong></td><td>绝对主力，全链路通投</td><td>1.97</td></tr>
-        <tr><td><strong>ADQ 3.0常规</strong></td><td><strong>30万</strong></td><td><strong>30%</strong></td><td>稳定补充，精细化调控</td><td>1.69</td></tr>
-        <tr><td><strong>全域通</strong></td><td><strong>20万</strong></td><td><strong>20%</strong></td><td>上限，试跑+系统探索</td><td>待验证 ⚠️</td></tr>
-    </table>
-
-    <h4>链路 × 工具 完整矩阵</h4>
-    <table>
-        <tr><th>链路</th><th>投放工具</th><th>日均预算</th><th>5天总预算</th><th>占比</th><th>预期ROI</th><th>说明</th></tr>
-        <tr><td><strong>直播</strong></td><td>ADQ智投</td><td>5.0万</td><td>25万</td><td>25%</td><td>1.9~2.0</td><td>主力放量</td></tr>
-        <tr><td><strong>直播</strong></td><td>ADQ 3.0</td><td>4.0万</td><td>20万</td><td>20%</td><td>1.7~1.9</td><td>补充跑量</td></tr>
-        <tr><td><strong>直播</strong></td><td>全域通（4001）</td><td>4.0万</td><td>20万</td><td>20%</td><td>待验证</td><td>⚠️ 上限，需确认审核</td></tr>
-        <tr><td><strong>小店直购</strong></td><td>ADQ智投</td><td>2.0万</td><td>10万</td><td>10%</td><td>2.0~2.5</td><td>链路已跑通</td></tr>
-        <tr><td><strong>小店直购</strong></td><td>ADQ 3.0</td><td>2.0万</td><td>10万</td><td>10%</td><td>1.8~2.2</td><td>3.0补充</td></tr>
-        <tr><td>KOC加热</td><td>ADQ智投/3.0</td><td>1.6万</td><td>8万</td><td>8%</td><td>间接贡献</td><td>短视频加热</td></tr>
-        <tr><td>达播引流</td><td>ADQ智投/3.0</td><td>1.4万</td><td>7万</td><td>7%</td><td>间接贡献</td><td>集中明星/达人日</td></tr>
-        <tr><td><strong>合计</strong></td><td></td><td><strong>20万</strong></td><td><strong>100万</strong></td><td>100%</td><td><strong>加权≈2.0+</strong></td><td></td></tr>
+        <tr><th>投放工具</th><th>客户规划</th><th>我方建议</th><th>占比</th><th>定位</th></tr>
+        <tr><td><strong>ADQ（智投+3.0）</strong></td><td>31.5万</td><td><strong>50万</strong></td><td><strong>42%</strong></td><td>核心可控链路：自播引流+商品卡+KOC加热</td></tr>
+        <tr><td><strong>微信豆</strong></td><td>79.5万</td><td><strong>67万</strong></td><td><strong>57%</strong></td><td>KOC主力投放+自播补充</td></tr>
+        <tr><td><strong>小店投放</strong></td><td>0.8万</td><td><strong>0.8万</strong></td><td>1%</td><td>商品卡补充</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>111.8万</strong></td><td><strong>117.8万</strong></td><td>100%</td><td></td></tr>
     </table>
 
     <div class="callout callout-warning">
-        ⚠️ <strong>全域通风险说明</strong>：当前全域通日耗仅几百元，存在审核风险。20万为上限预算，若无法起量则回流至ADQ智投。
+        💡 <strong>增加ADQ占比的理由</strong>：
+        <ul style="margin: 8px 0 0 20px;">
+            <li><strong>自播</strong>：ADQ智投历史ROI 1.97，可控性强于微信豆，加码至22万可保障自播70万GMV目标</li>
+            <li><strong>KOC</strong>：纯微信豆投放缺乏精准人群定向，拆出10万给ADQ加热，可做DMP人群包+行为定向，提升转化效率</li>
+            <li><strong>商品卡</strong>：链路已跑通ROI 2.0+，ADQ多投3万可直接多产6万GMV，是确定性最高的增量</li>
+        </ul>
     </div>
-    <div class="callout callout-todo">
-        🔲 <strong>TODO</strong>：需跟客户确认全域通审核状态及超品前能否跑通；客户待定100万预算分链路×分工具的最终分配逻辑。
-    </div>
+    </table>
 
     <h4>预算弹性机制</h4>
     <table>
